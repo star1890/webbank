@@ -5,43 +5,53 @@
 /* @var $model app\models\LoginForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use kartik\widgets\ActiveForm;
 
 $this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+<?php
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="ui '.$key.' message">';
+    echo '<p>'.$message.'</p>';
+    echo '</div>';
+}
+?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+<div class="ui grid atas">
+    
+    <div class="ten wide column">sad</div>
+    <div class="six wide column">
+        <div class="column">
+            <div class="ui stacked segment">
+                <h2 class="login header">Login</h2>
+                <?php $form = ActiveForm::begin([
+                    'id' => 'ibank-form',
+                    'type' => ActiveForm::TYPE_VERTICAL,
+                ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username',[
+                    'showLabels'=>false,
+                    'addon' => ['prepend' => ['content'=>'<i class="user icon"></i>']]
+                    ])->textInput([
+                        'placeholder'=>'Username',
+                        'autocomplete'=>'off',
+                        'autofocus' => true
+                        ]) ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'password',[
+                    'showLabels'=>false,
+                    'addon' => ['prepend' => ['content'=>'<i class="lock icon"></i>']]
+                    ])->passwordInput([
+                        'placeholder'=>'Password',
+                        'autocomplete'=>'off',
+                        ]) ?>
+                
+                <?= Html::submitButton('Masuk', ['class' => 'ui fluid large teal submit button', 'id'=>'submit']) ?>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?php ActiveForm::end(); ?>
             </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
+        </div>         
     </div>
 </div>

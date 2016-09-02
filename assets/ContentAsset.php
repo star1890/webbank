@@ -13,19 +13,15 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class ContentAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/layout';
     public $css = [
-        'css/site.css',
     ];
     public $js = [
-        'js/main.js',
+//        'js/content.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'Zelenin\yii\SemanticUI\assets\SemanticUICSSAsset',
-        'Zelenin\yii\SemanticUI\assets\SemanticUIJSAsset',
-    ];   
+    ];
 }

@@ -4,9 +4,25 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'language' => 'id-ID',
+    'name' => 'BRISyariah iBank',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+//        'assetManager' => [
+//            'bundles' => [
+//                'yii\web\JqueryAsset' => [
+//                    'js'=>[]
+//                ],
+//                'yii\bootstrap\BootstrapPluginAsset' => [
+//                    'js'=>[]
+//                ],
+//                'yii\bootstrap\BootstrapAsset' => [
+//                    'css' => [],
+//                ],
+//
+//            ],
+//        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Bri5P4ssw0rd',
@@ -38,14 +54,19 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
             'showScriptName' => false,
-            'rules' => [
-            ],
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' => array(
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+//                    ['class' => 'app\components\EnUrlRule'],
+            ),
         ],
-        */
     ],
     'params' => $params,
 ];
